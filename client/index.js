@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import App from './components/App';
 
 const Component = () => (
-    <>
-        <h1>Testing</h1>
-        <App />
-    </>
+    <StrictMode>
+        <Router>
+            <App />
+        </Router>
+    </StrictMode>
 );
 
 
