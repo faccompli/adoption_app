@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { useParams } from 'react-router-dom';
 import ErrorBoundary from './ErrorBoundary';
+import Carousel from './Carousel';
 
 class Details extends Component {
     state = { 
@@ -28,13 +29,9 @@ class Details extends Component {
     render(){
         const { loading, showModal, animal, breed, city, state, description, name, images } = this.state;
 
-        console.log(images[0]);
-        
         return (
             <section>
-                {
-                    images.length ? images.map(image => <img src={image} alt="animal" />) : null
-                }
+                <Carousel images={images} />
                 <div>
                     <h1>{name}</h1>
                     <h2>{`${animal} - ${breed} - ${city}, ${state}`}</h2>
