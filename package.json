@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel ./client/index.html"
+    "dev": "parcel --port 3000 ./client/index.html"
   },
+  "browserslist":[
+    "last 2 Chrome versions"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
