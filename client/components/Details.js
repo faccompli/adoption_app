@@ -2,6 +2,7 @@ import { Component } from 'react';
 import { useParams } from 'react-router-dom';
 import ErrorBoundary from './ErrorBoundary';
 import Carousel from './Carousel';
+import ThemeContext from './ThemeContext';
 
 class Details extends Component {
     state = { 
@@ -28,6 +29,8 @@ class Details extends Component {
     
     render(){
         const { loading, showModal, animal, breed, city, state, description, name, images } = this.state;
+
+        if(loading) return <h2>loading...</h2>
 
         return (
             <section>

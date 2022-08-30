@@ -5,3 +5,8 @@
 body {
     background: thistle;
 }
+
+.active {
+    width: 50%;
+    height: 50%;
+}
