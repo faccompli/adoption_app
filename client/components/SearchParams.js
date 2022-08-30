@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
+import ThemseContext from './ThemeContext';
 
 const SearchParams = () => {
     const [location, setLocation] = useState("");
+    const [animal, setAnimal] = useState("");
+    const [breed, setBreed] = useState("");
+    const [pets, setPets] = useState([]);
+    const [breeds] = useBreedList(animal);
+    const [theme, setTheme] = useContext(ThemeContext);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -16,7 +22,7 @@ const SearchParams = () => {
     return (
         <main>
             <form onSubmit={handleSubmit}>
-                <input type="text" name="location" placeholder="Search" value={location} onChange={handleChange} autoFocus/>
+                <input type="text" name="location" placeholder="Location" value={location} onChange={handleChange} autoFocus/>
                 <input type="submit" value="Submit"></input>
             </form>
         </main>
