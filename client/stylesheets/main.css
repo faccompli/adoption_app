@@ -6,7 +6,56 @@ body {
     background: thistle;
 }
 
+main {
+    height: 100%;
+    /* display: grid; */
+    /* grid-template-rows: repeat(auto-fit, 1fr); */
+}
+
+.search {
+    display: grid;
+    grid-template-rows: repeat(auto-fit, auto);
+    grid-gap: 2rem 0;
+    justify-items: center;
+    align-items: center;
+    margin-top: 5rem;
+}
+
 .active {
     width: 50%;
     height: 50%;
+}
+
+.pet {
+    display: grid;
+    grid-template-columns: 45% 1fr;
+    border-radius: 5px;
+    border: 1px solid black;
+    box-shadow: 4px 3px 4px grey;
+    width: 60vw;
+    height: 25vh;
+}
+
+.pet a {
+    display: block;
+}
+
+.pet:hover {
+    background: rgb(223, 199, 199);
+}
+
+.image-container {
+    display: grid;
+    place-items: center;
+}
+
+img {
+    height: auto;
+    max-width: 50%;
+}
+
+.info {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
 }
