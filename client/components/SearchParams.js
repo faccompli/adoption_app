@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const Main = () => {
+const SearchParams = () => {
     const [location, setLocation] = useState("");
 
     const handleSubmit = e => {
@@ -23,4 +23,4 @@ const Main = () => {
     )
 };
 
-export default Main;
+export default SearchParams;
