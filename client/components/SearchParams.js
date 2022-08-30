@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import ThemeContext from './ThemeContext';
 import Results from './Results';
+import useBreedList from './useBreedList';
 
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
@@ -34,12 +35,12 @@ const SearchParams = () => {
     }
 
     const handleAnimalChange = e => {
-        updateAnimal(e.target.value);
-        updateBreed("");
+        setAnimal(e.target.value);
+        setBreed("");
     }
 
     const handleBreedChange = e => {
-        updateBreed(e.target.value);
+        setBreed(e.target.value);
     }
 
     const handleThemeChange = e => {
