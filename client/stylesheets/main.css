@@ -70,3 +70,9 @@ img {
     border-left: 1px solid black;
     max-height: var(--pet-container-height);
 }
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+}

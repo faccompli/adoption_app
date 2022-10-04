@@ -26,12 +26,9 @@ import useBreedList from './useBreedList';
 
 //     })
 
-
-
-
 // });
 
-const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
+const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"]; //Remove this eventually
 
 const SearchParams = () => {
     const [location, setLocation] = useState("");
@@ -45,6 +42,13 @@ const SearchParams = () => {
         requestPets();
     }, []);
 
+    useEffect(() => {
+        const currentBreeds = [];
+        pets.forEach(pet => currentBreeds.push(pet.breeds.primary));
+        
+        console.log("What are the current breeds", currentBreeds);
+    }, [requestPets]); //Change requestPets to whenever you change the Animal drop down? handleAnimal Change here?
+
     //used to be async function
     function requestPets(){
         // const res = await fetch(`http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`);
@@ -54,10 +58,10 @@ const SearchParams = () => {
         pf.animal.search()
         .then(res => {
             const petsWithPhotosOnly = res.data.animals.filter(animal => {
-                if(animal.photos.length != 0) return animal
+                if(animal.photos.length != 0) return animal;
             });
 
-            setPets(petsWithPhotosOnly)
+            setPets(petsWithPhotosOnly);
         })
         .catch(err => console.error(err.message));
         // setPets(json.pets);

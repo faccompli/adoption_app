@@ -9,12 +9,12 @@ const Results = ({ pets }) => (
                 
                 return (
                 <Pet 
-                    animal={pet.animal}
+                    animal={pet.species}
                     key={pet.id}
                     name={pet.name}
-                    breed={pet.breed}
+                    breed={pet.breeds.primary}
                     images={pet.photos}
-                    location={`${pet.city}, ${pet.state}`}
+                    location={`${pet.contact.address.city}, ${pet.contact.address.state}`}
                     id={pet.id}
                 />
             )})

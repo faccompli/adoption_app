@@ -18,9 +18,6 @@ class Details extends Component {
     };
 
     componentDidMount(){
-
-        // fetch(`http://pets-v2.dev-apis.com/pets?id=${this.props.params.id}`)
-        // fetch(`https://api.petfinder.com/v2/animals/${this.props.params.id}`)
         const pf = new petfinder.Client({ apiKey: process.env.API_KEY, secret: process.env.SECRET });
 
         pf.animal.show(this.props.params.id)
@@ -28,7 +25,6 @@ class Details extends Component {
             console.log('DIDMOUNT = ', res.data.animal);
             return res.data.animal
         })
-        // .then(json => this.setState(Object.assign({ loading: false }, json.pets[0])))
         .then(animal => this.setState(Object.assign({ loading: false }, animal)))
         .catch(err => console.error(err.message));
     }
@@ -37,9 +33,7 @@ class Details extends Component {
 
     
     render(){
-        const { loading, showModal, animal, breed, city, state, description, name, images, age, photos, primary_photo_cropped } = this.state;
-
-        console.log('details =', photos)
+        const { loading, showModal,url, species, breeds, contact, description, name, images, age, photos, primary_photo_cropped } = this.state;
 
         if(loading) return <h2>loading...</h2>
 
@@ -48,10 +42,10 @@ class Details extends Component {
                 <Carousel images={photos} />
                 <div>
                     <h1>{name}</h1>
-                    <h2>{`${animal} - ${breed} - ${city}, ${state}`}</h2>
+                    <h2>{`${species} - ${breeds.primary} - ${contact.address.city}, ${contact.address.state}`}</h2>
                     <p>{age}</p>
                     <p>{description}</p>
-                    <button>Adopt {name}</button>
+                    <button><a href={url}>Adopt {name}</a></button>
                 </div>
             </section>
         )
