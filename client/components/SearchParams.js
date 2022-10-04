@@ -3,6 +3,34 @@ import ThemeContext from './ThemeContext';
 import Results from './Results';
 import useBreedList from './useBreedList';
 
+// const pf = new petfinder.Client({ apiKey: process.env.API_KEY, secret: process.env.SECRET });
+
+
+// pf.animal.search()
+// .then(res => {
+//     const animals = res.data.animals;
+
+//     animals.forEach(animal => {
+//         const pic = animal.photos[0].large;
+//         const description = animal.description
+//         const name = animal.name;
+       
+//         const img = document.createElement('img');
+//         const p = document.createElement('p');
+    
+//         img.src = pic
+//         img.alt = description
+//         p.textContent = `Name: ${name} Description: ${description}`;
+        
+//         document.querySelector('body').prepend(img, p);
+
+//     })
+
+
+
+
+// });
+
 const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"];
 
 const SearchParams = () => {
@@ -17,11 +45,22 @@ const SearchParams = () => {
         requestPets();
     }, []);
 
-    async function requestPets(){
-        const res = await fetch(`http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`);
-        const json = await res.json();
+    //used to be async function
+    function requestPets(){
+        // const res = await fetch(`http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`);
+        // const json = await res.json();
+        const pf = new petfinder.Client({ apiKey: process.env.API_KEY, secret: process.env.SECRET });
 
-        setPets(json.pets);
+        pf.animal.search()
+        .then(res => {
+            const petsWithPhotosOnly = res.data.animals.filter(animal => {
+                if(animal.photos.length != 0) return animal
+            });
+
+            setPets(petsWithPhotosOnly)
+        })
+        .catch(err => console.error(err.message));
+        // setPets(json.pets);
     }
 
     const handleSubmit = e => {
@@ -63,7 +102,7 @@ const SearchParams = () => {
                         onChange={handleAnimalChange}
                         onBlur={handleAnimalChange}
                     >
-                        <option />
+                        <option value="All">All</option>
                         {ANIMALS.map(animal => (
                             <option key={animal} value={animal}>{animal}</option>
                         ))}
@@ -79,7 +118,7 @@ const SearchParams = () => {
                         onChange={handleBreedChange}
                         onBlur={handleBreedChange}
                     >
-                        <option />
+                        <option value="All">All</option>
                         {breeds.map(breed => (
                             <option key={breed} value={breed}>{breed}</option>
                         ))}

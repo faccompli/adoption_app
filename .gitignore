@@ -6,3 +6,4 @@ dist/
 assets/
 .parcel-cache/
 parcel-cache/
+.env

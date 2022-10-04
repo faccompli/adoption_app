@@ -6,10 +6,12 @@ const Carousel = ({images}) => {
         setActive(+e.target.dataset.index)
     }
 
+    console.log('IMAGES=', images);
+
     return (
         <>
         {
-            images.length ? images.map((image, i) => <img className={i === active ? "active" : ""} key={image} src={image} alt="pet image" onClick={handleIndexClick} data-index={i} />) : null
+            images.length ? images.map((image, i) => <img className={i === active ? "active" : ""} key={image.large} src={image.large} alt="pet image" onClick={handleIndexClick} data-index={i} />) : null
         }
         </>
     )

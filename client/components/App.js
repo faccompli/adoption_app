@@ -3,6 +3,7 @@ import SearchParams from './SearchParams';
 import Details from './Details';
 
 const App = () => {
+
     return (
         <>
             <header>
