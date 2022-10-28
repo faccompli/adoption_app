@@ -28,11 +28,12 @@ import useBreedList from './useBreedList';
 
 // });
 
-const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"]; //Remove this eventually
+//const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"]; //Remove this eventually
 
 const SearchParams = () => {
     const [location, setLocation] = useState("");
     const [animal, setAnimal] = useState("");
+    const [animalTypes, setAnimalTypes] = useState([]); //This will replace ANIMALS
     const [breed, setBreed] = useState("");
     const [pets, setPets] = useState([]);
     const [breeds] = useBreedList(animal);
@@ -44,18 +45,37 @@ const SearchParams = () => {
 
     useEffect(() => {
         const currentBreeds = [];
-        pets.forEach(pet => currentBreeds.push(pet.breeds.primary));
+        pets.forEach(pet => {
+            const petBreed =  pet.breeds.primary;
+
+            if(!currentBreeds.includes(petBreed)){
+                currentBreeds.push(petBreed);
+            }
+        });
         
-        console.log("What are the current breeds", currentBreeds);
     }, [requestPets]); //Change requestPets to whenever you change the Animal drop down? handleAnimal Change here?
 
-    //used to be async function
-    function requestPets(){
+    //used to use async/await 
+    function requestPets(type = {}){
         // const res = await fetch(`http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`);
         // const json = await res.json();
+        
+        if(type?.type == "All") type = {}; // Figure out a way to do this cleaner?
+       
         const pf = new petfinder.Client({ apiKey: process.env.API_KEY, secret: process.env.SECRET });
 
-        pf.animal.search()
+        //Set the setAnimalTypes here
+        pf.animalData.types() 
+        .then(res => {
+            console.log(res.data.types);
+            const types = res.data.types.map(type => type.name)
+            console.log("Types", types);
+            setAnimalTypes(types);
+        })
+        .catch(err => console.error(err.message));
+
+        //Display search results (default is where the type == nothing - which means everything)
+        pf.animal.search(type)
         .then(res => {
             const petsWithPhotosOnly = res.data.animals.filter(animal => {
                 if(animal.photos.length != 0) return animal;
@@ -79,6 +99,8 @@ const SearchParams = () => {
 
     const handleAnimalChange = e => {
         setAnimal(e.target.value);
+        requestPets({ type: e.target.value });
+        //Make this request with the target animal. Update the submit button so that it doesn't override this.
         setBreed("");
     }
 
@@ -107,7 +129,8 @@ const SearchParams = () => {
                         onBlur={handleAnimalChange}
                     >
                         <option value="All">All</option>
-                        {ANIMALS.map(animal => (
+                        {/* Update ANIMALS here with the newly created animalTypes & setAnimalTypes */}
+                        {animalTypes.map(animal => (
                             <option key={animal} value={animal}>{animal}</option>
                         ))}
                     </select>
