@@ -9,6 +9,7 @@ function useBreedList(animal){
 
     useEffect(() => {
         if(!animal){
+            //This is where All would be
             setBreedList([]);
         } else if (localCache[animal]){
             setBreedList(localCache[animal]);

@@ -3,37 +3,11 @@ import ThemeContext from './ThemeContext';
 import Results from './Results';
 import useBreedList from './useBreedList';
 
-// const pf = new petfinder.Client({ apiKey: process.env.API_KEY, secret: process.env.SECRET });
-
-
-// pf.animal.search()
-// .then(res => {
-//     const animals = res.data.animals;
-
-//     animals.forEach(animal => {
-//         const pic = animal.photos[0].large;
-//         const description = animal.description
-//         const name = animal.name;
-       
-//         const img = document.createElement('img');
-//         const p = document.createElement('p');
-    
-//         img.src = pic
-//         img.alt = description
-//         p.textContent = `Name: ${name} Description: ${description}`;
-        
-//         document.querySelector('body').prepend(img, p);
-
-//     })
-
-// });
-
-//const ANIMALS = ["bird", "cat", "dog", "rabbit", "reptile"]; //Remove this eventually
 
 const SearchParams = () => {
     const [location, setLocation] = useState("");
     const [animal, setAnimal] = useState("");
-    const [animalTypes, setAnimalTypes] = useState([]); //This will replace ANIMALS
+    const [animalTypes, setAnimalTypes] = useState([]); 
     const [breed, setBreed] = useState("");
     const [pets, setPets] = useState([]);
     const [breeds] = useBreedList(animal);
@@ -55,11 +29,7 @@ const SearchParams = () => {
         
     }, [requestPets]); //Change requestPets to whenever you change the Animal drop down? handleAnimal Change here?
 
-    //used to use async/await 
-    function requestPets(type = {}){
-        // const res = await fetch(`http://pets-v2.dev-apis.com/pets?animal=${animal}&location=${location}&breed=${breed}`);
-        // const json = await res.json();
-        
+    function requestPets(type = {}){        
         if(type?.type == "All") type = {}; // Figure out a way to do this cleaner?
        
         const pf = new petfinder.Client({ apiKey: process.env.API_KEY, secret: process.env.SECRET });
@@ -84,7 +54,6 @@ const SearchParams = () => {
             setPets(petsWithPhotosOnly);
         })
         .catch(err => console.error(err.message));
-        // setPets(json.pets);
     }
 
     const handleSubmit = e => {
@@ -129,7 +98,6 @@ const SearchParams = () => {
                         onBlur={handleAnimalChange}
                     >
                         <option value="All">All</option>
-                        {/* Update ANIMALS here with the newly created animalTypes & setAnimalTypes */}
                         {animalTypes.map(animal => (
                             <option key={animal} value={animal}>{animal}</option>
                         ))}
