@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import ThemeContext from './ThemeContext';
 import Results from './Results';
-// import useBreedList from './useBreedList';
 
 
 const SearchParams = () => {
@@ -10,7 +9,6 @@ const SearchParams = () => {
     const [animalTypes, setAnimalTypes] = useState([]); 
     const [breed, setBreed] = useState("");
     const [pets, setPets] = useState([]);
-    // const [breeds] = useBreedList(animal); //maybe I don't need this custom hook anymore
     const [breedsList, setBreedsList] = useState([]);
     const [theme, setTheme] = useContext(ThemeContext);
 
@@ -18,19 +16,6 @@ const SearchParams = () => {
         requestPets();
     }, []);
 
-    // This isn't even doing anything!
-    // useEffect(() => {
-    //     console.log("breedsList =", breedsList);
-    //     const currentBreeds = [];
-    //     pets.forEach(pet => {
-    //         const petBreed =  pet.breeds.primary;
-
-    //         if(!currentBreeds.includes(petBreed)){
-    //             currentBreeds.push(petBreed);
-    //         }
-    //     });
-        
-    // }, [animal]); //Change requestPets to whenever you change the Animal drop down? handleAnimal Change here?
 
     useEffect(() => {
         requestPets({type: animal, breed: breed});
