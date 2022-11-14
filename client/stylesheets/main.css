@@ -41,7 +41,7 @@ main {
     width: 30vw;
     height: var(--pet-container-height);
     background: rgba(245, 245, 245, 0.467);
-
+    overflow: scroll;
 }
 
 /* .pet:hover {
@@ -65,10 +65,22 @@ img {
 
 .info {
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: .3fr 1fr;
     justify-items: center;
     border-left: 1px solid black;
     max-height: var(--pet-container-height);
+}
+
+.info h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+}
+
+.info h2 {
+    font-size: 1.2rem;
+    margin: 0;
+    padding-inline: 1rem;
+    align-self: center;
 }
 
 a {

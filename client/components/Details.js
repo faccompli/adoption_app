@@ -22,7 +22,6 @@ class Details extends Component {
 
         pf.animal.show(this.props.params.id)
         .then(res => {
-            console.log('DIDMOUNT = ', res.data.animal);
             return res.data.animal
         })
         .then(animal => this.setState(Object.assign({ loading: false }, animal)))
