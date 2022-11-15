@@ -13,19 +13,14 @@ const SearchParams = () => {
     const [theme, setTheme] = useContext(ThemeContext);
 
     useEffect(() => {
-        requestPets();
-    }, []);
+        const type = {};
 
+        if(animal.length) type.type = animal;
+        if(location.length) type.location = location;
+        if(breed.length) type.breed = breed;
 
-    useEffect(() => {
-        requestPets({type: animal, breed: breed});
-        console.log("Are you running too!");
-    }, [breed]);
-
-    //Combine this with another useEffect by adding location to the array? The real fix comes from inside the requestPets function to handle location
-    useEffect(() => {
-        requestPets();
-    }, [location])
+        requestPets(type);
+    }, [breed, location]);
 
     function requestPets(type = {}){        
         const pf = new petfinder.Client({ apiKey: process.env.API_KEY, secret: process.env.SECRET });
@@ -38,23 +33,19 @@ const SearchParams = () => {
         })
         .catch(err => console.error(err.message));
 
-        /* test below */
-        console.log("TYPE=", type);
-        pf.animal.search({ location: "Jersey City, NJ"})
-        .then(res => console.log("Search working for location?", res.data.animals))
-        .catch(err => console.error(err.message));
-
-
-        /* test above */
-
-
         //Display search results (default is where the type == nothing - which means everything)
         pf.animal.search(type)
         .then(res => {
-            const petsWithPhotosOnly = res.data.animals.filter(animal => {
+            console.log("Where is location doing its thing?", type, res.data.animals);
+            let petsWithPhotosOnly = res.data.animals.filter(animal => {
                 if(animal.photos.length) return animal;
             }); 
 
+            if(type.location){
+                //Sort by distance, closest to farthest, only if location is given.
+                petsWithPhotosOnly = petsWithPhotosOnly.sort((a,b) => a.distance - b.distance);
+            }
+            
             setPets(petsWithPhotosOnly);
 
             //Set breedsList here? It has to be in this function somewhere - maybe in the filter above? 
@@ -67,31 +58,24 @@ const SearchParams = () => {
 
             setBreedsList(currentBreedsListNoDuplicates.sort());
         })
-        .catch(err => console.error(err.message));
+        .catch(err => console.error('ERROR MESSAGE', err.message));
     }
 
     const handleSubmit = e => {
         e.preventDefault();
-        //Take the location
-        const location = e.target.location.value.split(',');
+        const currentLocation = e.target.location.value.split(/,\s*/);
 
         //Protect against inproper responses
-        if(location.length !== 2){
+        if(currentLocation.length !== 2){
             alert("Inproper response. Please enter a city and a state seaprated by a comma")
             e.target.location.value = "";
             e.target.location.focus()
         } else {
-            const city = location[0];
-            const state = location[1].toUpperCase();
-
-            //use setLocation here I think
+            const city = currentLocation[0];
+            const state = currentLocation[1].toUpperCase();
+            
             setLocation(`${city}, ${state}`);
         }
-        
-    }
-
-    const handleLocationChange = e => {
-        setLocation(e.target.value);
     }
 
     const handleAnimalChange = e => {
@@ -164,7 +148,7 @@ const SearchParams = () => {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="location">
                     Location
-                    <input type="text" id="location" name="location" placeholder="City, State Abbreviation" value={location} onChange={handleLocationChange} autoFocus/>
+                    <input type="text" id="location" name="location" placeholder="City, State Abbreviation" autoFocus/>
                 </label>
 
                 {/* <label htmlFor="theme">
