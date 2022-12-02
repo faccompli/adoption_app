@@ -6,7 +6,13 @@ const Results = ({ pets }) => (
             <h1>No Pets Found</h1>
         ) : (
             pets.map(pet => {
-                
+                let distance;
+                if(pet.distance !== null) {
+                    distance = `~${pet.distance.toFixed(0)} Miles Away`; 
+                } else {
+                    distance = "";
+                }
+
                 return (
                 <Pet 
                     animal={pet.species}
@@ -14,7 +20,7 @@ const Results = ({ pets }) => (
                     name={pet.name}
                     breed={pet.breeds.primary}
                     images={pet.photos}
-                    location={`${pet.contact.address.city}, ${pet.contact.address.state}`}
+                    location={`${pet.contact.address.city}, ${pet.contact.address.state} ${distance}`}
                     id={pet.id}
                 />
             )})

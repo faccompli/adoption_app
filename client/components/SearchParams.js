@@ -36,7 +36,6 @@ const SearchParams = () => {
         //Display search results (default is where the type == nothing - which means everything)
         pf.animal.search(type)
         .then(res => {
-            console.log("Where is location doing its thing?", type, res.data.animals);
             let petsWithPhotosOnly = res.data.animals.filter(animal => {
                 if(animal.photos.length) return animal;
             }); 
@@ -46,8 +45,6 @@ const SearchParams = () => {
                 petsWithPhotosOnly = petsWithPhotosOnly.sort((a,b) => a.distance - b.distance);
             }
             
-            setPets(petsWithPhotosOnly);
-
             //Set breedsList here? It has to be in this function somewhere - maybe in the filter above? 
             const currentBreedsList = res.data.animals.map(animal => animal.breeds.primary);
             const currentBreedsListNoDuplicates = [];
@@ -56,6 +53,7 @@ const SearchParams = () => {
                 if(!currentBreedsListNoDuplicates.includes(breed)) currentBreedsListNoDuplicates.push(breed);
             });
 
+            setPets(petsWithPhotosOnly);
             setBreedsList(currentBreedsListNoDuplicates.sort());
         })
         .catch(err => console.error('ERROR MESSAGE', err.message));
