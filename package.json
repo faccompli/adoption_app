@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel --port 3000 ./client/index.html"
+    "start": "parcel --port 3011 ./client/index.html",
+    "dev": "parcel --port 3011 ./client/index.html"
   },
   "browserslist": [
     "last 2 Chrome versions"
