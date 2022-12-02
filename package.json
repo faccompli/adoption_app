@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel --port 3011 ./client/index.html",
+    "start": "parcel --port 3011 pm2 start --name pet_app ./client/index.html",
     "dev": "parcel --port 3011 ./client/index.html"
   },
   "browserslist": [
