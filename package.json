@@ -2,11 +2,11 @@
   "name": "pet_adoption_app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "source": "./client/index.html",
   "scripts": {
-    "start": "parcel --port 3311 & pm2 start --name pet_app ./client/index.html",
-    "dev": "parcel --port 3311 ./client/index.html"
+    "start": "pm2 start --name pet_app parcel --port 3311 ./client/index.html",
+    "dev": "parcel --port 3311 ./client/index.html",
+    "build": "parcel build --public-url ./"
   },
   "browserslist": [
     "last 2 Chrome versions"
