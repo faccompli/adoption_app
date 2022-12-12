@@ -3,28 +3,19 @@
 }
 
 :root {
-    --pet-container-height: 25vh;
-}
-
-body {
-    /* background: thistle; */
-    /* display: grid; */
-    /* grid: auto-fit / 1fr; */
+    --pet-container-height: 30vh;
+    --pet-container-width: 230px;
 }
 
 main {
     height: 100%;
-    /* display: grid; */
-    /* grid-template-rows: repeat(auto-fit, 1fr); */
 }
 
 .search {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(auto-fit, auto);
     grid-gap: 2rem;
-
     margin-top: 5rem;
+    grid-template-columns: repeat(auto-fill, minmax(var(--pet-container-width), 1fr));
 }
 
 .active {
@@ -33,53 +24,53 @@ main {
 }
 
 .pet {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-radius: 5px;
-    border: 1px solid black;
-    box-shadow: 4px 3px 4px grey;
-    width: 30vw;
     height: var(--pet-container-height);
+    min-width: var(--pet-container-width);
+    display: grid;
+    grid-template-rows: 60% 40%;
     background: rgba(245, 245, 245, 0.467);
-    overflow: scroll;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 4px 3px 4px grey;
+    overflow: hidden;
 }
 
-/* .pet:hover {
-    background: rgba(99, 96, 96, 0.763);
-    border: 1px solid rgba(99, 96, 96, 0.763);
-} */
-
-.pet a {
-    display: block;
+.pet:hover {
+    box-shadow: 4px 3px 4px rgb(74, 49, 173);
+    transform: rotate(.5deg);
 }
 
-img {
-    /* height: auto; */
-    /* max-width: 50%; */
-    /* object-fit: contain; */
-    /* height: 20%; */
-    max-height: 70%;
-    max-width: 70%;
+.pet-photo-container {
+    background: black;
+    height: 100%;
+    width: 100%;
+    border: 3px solid white;
+}
+
+.pet-photo {
+    height: 100%;
+    width: 100%;
     place-self: center;
+    object-fit: contain;
 }
 
-.info {
+.pet-info {
     display: grid;
     grid-template-rows: .3fr 1fr;
     justify-items: center;
-    border-left: 1px solid black;
-    max-height: var(--pet-container-height);
+    border: 3px solid white;
+    height: 100%;
 }
 
-.info h1 {
-    font-size: 1.5rem;
+.pet-info h1 {
+    font-size: 1.2rem;
     margin-bottom: 0;
 }
 
-.info h2 {
-    font-size: 1.2rem;
+.pet-info h2 {
+    font-size: .8rem;
     margin: 0;
-    padding-inline: 1rem;
+    padding-inline: .7rem;
     align-self: center;
 }
 
