@@ -18,9 +18,54 @@ main {
     grid-template-columns: repeat(auto-fill, minmax(var(--pet-container-width), 1fr));
 }
 
-.active {
-    width: 50%;
-    height: 50%;
+.carousel {
+    height: 80vh;
+    width: 70vw;
+    grid-template-rows: 1fr 200px;
+    display: grid;
+    border: 1px solid black;
+}
+
+.carousel-display {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    background: white;
+    object-fit: cover;
+    overflow: hidden;
+}
+
+.carousel-display img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: scale-down;
+}
+
+.carousel-nav {
+    display: flex;
+    /* grid-template-columns: repeat(auto-fill, 20%); */
+    /* gap: 5px; */
+    /* overflow-x: scroll; */
+    background: rgb(187,187,187);
+    background: radial-gradient(circle, rgba(187,187,187,1) 4%, rgba(107,107,107,0.7399160347732843) 33%, rgb(50, 50, 50) 100%);     max-width: 1000%;
+    height: 100%;
+    border-top: 1px solid black;
+}
+
+/* .carousel-nav img:not(.active) {
+    width: 20%;
+    object-fit: contain;
+} */
+
+.carousel-nav img {
+    width: 20%;
+    object-fit: cover;
+    border: 10px solid white;
+}
+
+.carousel-display .active {
+    /* width: 50%; */
+    /* min-height: 70vh; */
 }
 
 .pet {
@@ -44,7 +89,7 @@ main {
     background: black;
     height: 100%;
     width: 100%;
-    border: 3px solid white;
+    border: 10px solid white;
 }
 
 .pet-photo {

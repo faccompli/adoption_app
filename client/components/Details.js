@@ -37,7 +37,7 @@ class Details extends Component {
         if(loading) return <h2>loading...</h2>
 
         return (
-            <section>
+            <section className='details'>
                 <Carousel images={photos} />
                 <div>
                     <h1>{name}</h1>
