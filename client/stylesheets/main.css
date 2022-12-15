@@ -9,6 +9,7 @@
 
 main {
     height: 100%;
+    max-width: 100vw;
 }
 
 .search {
@@ -30,7 +31,7 @@ main {
 
 .carousel {
     height: 80vh;
-    width: 100vw;
+    /* width: 100vw; */
     grid-template-rows: 1fr 200px;
     display: grid;
     border: 1px solid black;
@@ -75,8 +76,7 @@ main {
 } */
 
 .carousel-nav img {
-    max-width: 20%;
-    min-width: 10vw;
+    min-width: auto;
     object-fit: contain;
     border: 10px solid white;
     background: black;
