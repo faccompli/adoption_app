@@ -37,9 +37,9 @@ class Details extends Component {
         if(loading) return <h2>loading...</h2>
 
         return (
-            <section className='details'>
+            <section className="details">
                 <Carousel images={photos} />
-                <div>
+                <div className="details-info">
                     <h1>{name}</h1>
                     <h2>{`${species} - ${breeds.primary} - ${contact.address.city}, ${contact.address.state}`}</h2>
                     <p>{age}</p>

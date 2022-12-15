@@ -16,11 +16,21 @@ main {
     grid-gap: 2rem;
     margin-top: 5rem;
     grid-template-columns: repeat(auto-fill, minmax(var(--pet-container-width), 1fr));
+    padding: 1rem;
+}
+
+.details {
+    display: grid;
+    place-items: center;
+}
+
+.details-info {
+    justify-self: start;
 }
 
 .carousel {
     height: 80vh;
-    width: 70vw;
+    width: 100vw;
     grid-template-rows: 1fr 200px;
     display: grid;
     border: 1px solid black;
@@ -50,6 +60,13 @@ main {
     background: radial-gradient(circle, rgba(187,187,187,1) 4%, rgba(107,107,107,0.7399160347732843) 33%, rgb(50, 50, 50) 100%);     max-width: 1000%;
     height: 100%;
     border-top: 1px solid black;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-x: scroll;
+}
+
+.carousel-nav::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
 }
 
 /* .carousel-nav img:not(.active) {
@@ -58,9 +75,11 @@ main {
 } */
 
 .carousel-nav img {
-    width: 20%;
-    object-fit: cover;
+    max-width: 20%;
+    min-width: 10vw;
+    object-fit: contain;
     border: 10px solid white;
+    background: black;
 }
 
 .carousel-display .active {
